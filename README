@@ -1,0 +1,64 @@
+Webserver to manage todo lists, built on Django. Todo lists contain todo items
+with priority numbers. Like any todo list, a higher priority number pushes an
+item down the list. Basic CRUD endpoints exist for both lists and items.
+
+Both todo lists and todo items have a name and description. The name must use
+alphanumeric chars and underscores only, and must be globally unique. It can
+not be changed once a list or item is created. Items also have a todo list that
+it belongs to and a priority number. If a new item is created, or an existing
+item is updated, to have the same priority as an existing item on its list, the
+other items are automatically pushed down the list to make room.
+
+Installation:
+1. Create a Python3 virtual env and activate it.
+2. Install requirements with 'pip install -r requirements.txt'
+3. Create a .env file in the directory above the project root. Values are
+specified as KEYWORD=value. The following values must be present:
+DEBUG=off
+ALLOWED_HOSTS=[recommend 'localhost' for a personal server]
+SECRET_KEY=[django secret key]
+DATABASE_URL=[DB URL in any format Django suports]
+4. Install DB tables with 'python manage.py migrate'
+5. Start the server with 'python manage.py runserver'
+
+Endpoints:
+GET api/v1/todolist - lists all todo lists
+POST api/v1/todolist - create a new todo list. The body must be JSON with
+  "name" and "description" fields.
+GET api/v1/todolist/<name> - fetch a todo list by name. Returns 404 if not
+  found
+PUT api/v1/todolist/<name> - update a todo list by name. Returns 400 if not
+  found. The body must be JSON with a "name" field matching the value in the
+  URL and a "description" field
+PATCH api/v1/todolist/<name> - partial update a todo list by name. Returns 400
+  if not found. The body must be JSON with a "description" field
+DELETE api/v1/todolist/<name> - delete a todo list by name. Returns 400 if not
+  found. Any items in the list are also deleted.
+GET api/v1/todolist/<name>/with_items - fetch a todo list and all items in in
+  in priority order. Returns 404 if not found.
+
+GET api/v1/todoitem - lists all todo items, in priority order, grouped by todo
+   list
+POST api/v1/todoitem - create a new todo item. The body must be JSON with
+  "name", "description", "to_do_list", and "priority" fields. The named todo
+  list must exist or an error is returned.
+GET api/v1/todoitem/<name> - fetch a todo item by name. Returns 404 if not
+  found
+PUT api/v1/todoitem/<name> - update a todo item by name. Returns 400 if not
+  found. The body must be JSON with a "name" field matching the value in the
+  URL and "description", "to_do_list", and "priority" fields
+PATCH api/v1/todoitem/<name> - partial update a todo item by name. Returns 400
+  if not found. The body must be JSON with one or more of the following fields:
+  "description", "to_do_list", "priority"
+DELETE api/v1/todoitem/<name> - delete a todo item by name. Returns 400 if not
+  found.
+
+
+
+
+
+  
+
+
+Running unit tests:
+python manage.py test
