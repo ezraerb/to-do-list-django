@@ -1,0 +1,10 @@
+click
+Django>=4.2.1
+django-environ>=0.10.0
+djangorestframework>=3.14.0
+isort
+lazy-object-proxy
+mypy-extensions
+psycopg2==2.9.6
+pytz
+sqlparse
