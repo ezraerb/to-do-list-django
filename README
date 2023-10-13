@@ -10,16 +10,25 @@ item is updated, to have the same priority as an existing item on its list, the
 other items are automatically pushed down the list to make room.
 
 Installation:
+First set up a virtual environment:
 1. Create a Python3 virtual env and activate it.
-2. Install requirements with 'pip install -r requirements.txt'
-3. Create a .env file in the directory above the project root. Values are
-specified as KEYWORD=value. The following values must be present:
+2. Set the following environment variables:
 DEBUG=off
 ALLOWED_HOSTS=[recommend 'localhost' for a personal server]
 SECRET_KEY=[django secret key]
+The following value is optional. If not specified, a sqllite DB file in the
+project directory will be used.
 DATABASE_URL=[DB URL in any format Django suports]
-4. Install DB tables with 'python manage.py migrate'
-5. Start the server with 'python manage.py runserver'
+
+The project has a makefile to install and run the server.
+'make run' will install all dependencies, set up the DB, and then run the server.
+'make test' will install all dependencies, set up the DB, and then run unit tests.
+run 'make help' to see the full list of targets
+
+
+Alternatively, build and run the server as a docker container. Port 8000 must be
+exposed. The environment variables mentioned above must be passed into the
+docker run command, either directly or through an environment file.
 
 Endpoints:
 GET api/v1/todolist - lists all todo lists
