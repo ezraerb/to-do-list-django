@@ -1,7 +1,8 @@
 """ Serializers for models for a set of todo lists and items on those lists """
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import ToDoList, ToDoItem
+
+from .models import ToDoItem, ToDoList
 
 
 # Multiple models have a primary key field called 'name'. Updating it will

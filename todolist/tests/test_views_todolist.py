@@ -1,11 +1,13 @@
 """ Tests for todo list view methods """
-from copy import copy
 import json
-from rest_framework import status
-from django.test import TestCase, Client
+from copy import copy
+
+from django.test import Client, TestCase
 from django.urls import reverse
-from ..models import ToDoList, ToDoItem
-from ..serializers import ToDoListSerializer, ToDoItemSerializer
+from rest_framework import status
+
+from ..models import ToDoItem, ToDoList
+from ..serializers import ToDoItemSerializer, ToDoListSerializer
 from .test_utils import strip_timestamps
 
 # initialize the APIClient app

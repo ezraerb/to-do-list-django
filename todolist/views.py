@@ -2,8 +2,9 @@
 from django.db import transaction
 from rest_framework import generics
 from rest_framework.response import Response
-from .models import ToDoList, ToDoItem
-from .serializers import ToDoListSerializer, ToDoItemSerializer
+
+from .models import ToDoItem, ToDoList
+from .serializers import ToDoItemSerializer, ToDoListSerializer
 
 
 class ToDoListMult(generics.ListCreateAPIView):
@@ -103,6 +104,7 @@ class ToDoItemMult(generics.ListCreateAPIView, MoveExistingItemsMixin):
 
         self.move_items_priority_if_needed(serializer.validated_data)
         return super().perform_create(serializer)
+
 
 # pylint: disable=too-many-ancestors
 class ToDoItemSingle(generics.RetrieveUpdateDestroyAPIView, MoveExistingItemsMixin):

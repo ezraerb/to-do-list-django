@@ -1,6 +1,7 @@
 """ URL paths to support the todo list app """
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
+
 from todolist import views
 
 app_name = "todolist"

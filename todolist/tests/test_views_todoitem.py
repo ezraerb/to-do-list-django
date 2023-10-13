@@ -1,10 +1,12 @@
 """ Tests for views related to todo item manipulation """
-from copy import copy
 import json
-from rest_framework import status
-from django.test import TestCase, Client
+from copy import copy
+
+from django.test import Client, TestCase
 from django.urls import reverse
-from ..models import ToDoList, ToDoItem
+from rest_framework import status
+
+from ..models import ToDoItem, ToDoList
 from ..serializers import ToDoItemSerializer
 from .test_utils import strip_timestamps
 

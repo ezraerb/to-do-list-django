@@ -1,7 +1,8 @@
 """ Test for todolist application models """
 from django.db.utils import IntegrityError
 from django.test import TestCase
-from ..models import ToDoList, ToDoItem
+
+from ..models import ToDoItem, ToDoList
 
 
 class ToDoListTest(TestCase):

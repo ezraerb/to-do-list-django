@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+
 import environ
 
 env = environ.Env(
@@ -19,18 +20,15 @@ env = environ.Env(
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, "..", ".env"))
-
 # False if not in os.environ because of casting above
 DEBUG = env("DEBUG")
 
 SECRET_KEY = env("SECRET_KEY")
 
 DATABASES = {
-    # Parses os.environ['DATABASE_URL'] and raises
-    # ImproperlyConfigured exception if not found
-    "default": env.db(),
+    # Parses os.environ['DATABASE_URL'] If not set, puts a sqllite file in
+    # the base directory
+    "default": env.db(default=f"sqlite:///{BASE_DIR}/todolist.sqlite"),
 }
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
